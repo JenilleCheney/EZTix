@@ -1,6 +1,6 @@
 ﻿namespace EZTix.Models
 {
-    public class Event
+    public class Show
     {
         public int EventID { get; set; }
 
