@@ -2,11 +2,11 @@
 {
     public class Show
     {
-        public int EventID { get; set; }
+        public int ShowID { get; set; }
 
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public DateTime EventTime  { get; set; }
+        public DateTime ShowTime  { get; set; }
 
         public string Owner { get; set; } = string.Empty;
 

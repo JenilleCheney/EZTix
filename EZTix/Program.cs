@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using EZTix.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<EZTixContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EZTixContext") ?? throw new InvalidOperationException("Connection string 'EZTixContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

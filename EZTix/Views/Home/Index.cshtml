@@ -1,7 +1,24 @@
-﻿@{
+﻿@model List<EZTix.Models.Show>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome To EZ Tix</h1>
+</div>
+<div class="show-list">
+    <p> THIS IS HORSE SHIT</p>
+
+        @foreach (var show in Model)
+        {
+           @* <img src="@Show.ImagePath" alt="@Show.Description" class="img-fluid rounded mb-2 performance-img" />*@
+            <h2>@show.Title</h2>
+            <p>
+                @* @Show.ShowId<br /> *@
+                @show.Description<br />
+                @show.Owner<br />
+                @show.ShowTime
+            </p>
+        }
 </div>
