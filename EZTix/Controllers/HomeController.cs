@@ -1,44 +1,35 @@
+using EZTix.Data;
 using EZTix.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace EZTix.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        // ADDED
+        private readonly EZTixContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, EZTixContext context)
         {
             _logger = logger;
+            // ADDED
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Show> shows = new List<Show>();
-            Show show1 = new Show();
-            show1.ShowID = 1;
-            show1.Title = "The Shenanigans";
-            show1.Description = "Get Wild to the beats of The Shenanigans";
-            show1.ShowTime = new DateTime(2025, 10, 31, 20, 30, 00);
-            show1.Owner = "Carol Baskins";
-            show1.Created = DateTime.Now;
-            show1.CategoryId = 1;
-            show1.VenueId = 1;
-            Show show2 = new Show();
-            show2.ShowID = 2;
-            show2.Title = "Jazz in the Park";
-            show2.Description = "Smooth Jazz Evening";
-            show2.ShowTime = new DateTime(2024, 7, 15, 18, 00, 00);
-            show2.Owner = "John Doe";
-            show2.Created = DateTime.Now;
-            show2.CategoryId = 2;
-            show2.VenueId = 2;
-            Show show3 = new Show();
+            // ADDED
+            var shows = await _context.Show
+                .OrderBy(e => e.ShowTime)
+                .ToListAsync();
             return View(shows);
         }
 
-      
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
