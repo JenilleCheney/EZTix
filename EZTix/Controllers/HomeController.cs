@@ -11,7 +11,6 @@ namespace EZTix.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        //ADDED
         private readonly EZTixContext _context;
 
         public HomeController(ILogger<HomeController> logger, EZTixContext context)
@@ -20,9 +19,12 @@ namespace EZTix.Controllers
             _context = context;
         }
 
+
         public async Task<IActionResult> Index() 
         {
             var shows = await _context.Show
+                  .Include(s => s.Venue)
+                  .Include(s => s.Category)
                   .OrderBy(e => e.ShowTime)
                   .ToListAsync();
             return View(shows);

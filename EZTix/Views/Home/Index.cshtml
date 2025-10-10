@@ -8,17 +8,18 @@
     <h1 class="display-4">Welcome To EZ Tix</h1>
 </div>
 <div class="show-list">
-    <p> THIS IS HORSE SHIT</p>
 
         @foreach (var show in Model)
         {
-           @* <img src="@Show.ImagePath" alt="@Show.Description" class="img-fluid rounded mb-2 performance-img" />*@
+           @* <img src="@show.ImagePath" alt="@show.Description" class="img-fluid rounded mb-2 performance-img" /> *@
             <h2>@show.Title</h2>
             <p>
-                @* @Show.ShowId<br /> *@
+                @* @show.ShowId<br /> *@
                 @show.Description<br />
                 @show.Owner<br />
-                @show.ShowTime
+                @show.ShowTime <br />
+                @show.Venue?.VenueName <br />
+                @show.Venue?.VenueLocation <br />
             </p>
         }
 </div>
