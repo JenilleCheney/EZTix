@@ -55,10 +55,10 @@
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                @(item.Category?.CategoryName ?? "—")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Venue.VenueId)
+                @(item.Venue?.VenueName ?? "—")
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ShowID">Edit</a> |

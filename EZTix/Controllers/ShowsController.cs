@@ -49,8 +49,8 @@ namespace EZTix.Controllers
         // GET: Shows/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId");
-            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueId");
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryName");
+            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueName");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace EZTix.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", show.CategoryId);
-            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueId", show.VenueId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryName", show.CategoryId);
+            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueName", show.VenueId);
             return View(show);
         }
 
@@ -85,8 +85,8 @@ namespace EZTix.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", show.CategoryId);
-            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueId", show.VenueId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryName", show.CategoryId);
+            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueName", show.VenueId);
             return View(show);
         }
 
@@ -122,8 +122,8 @@ namespace EZTix.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", show.CategoryId);
-            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueId", show.VenueId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryName", show.CategoryId);
+            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueName", show.VenueId);
             return View(show);
         }
 
