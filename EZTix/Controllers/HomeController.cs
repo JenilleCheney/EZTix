@@ -20,7 +20,7 @@ namespace EZTix.Controllers
         }
 
 
-        public async Task<IActionResult> Index() 
+        public async Task<IActionResult> Index()
         {
             var shows = await _context.Show
                   .Include(s => s.Venue)
@@ -30,7 +30,7 @@ namespace EZTix.Controllers
             return View(shows);
         }
 
-      
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<EZTix.Models.Show>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Current Shows";
 }
 
-<h1>Index</h1>
+<h1> Current Shows</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -45,14 +45,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowTime)
+            <td class="text-nowrap">
+                @item.ShowTime.ToString("MMMM d yyyy h:mm tt")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Owner)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
+            <td class="text-nowrap">
+                @item.Created.ToString("MMMM d yyyy h:mm tt")
             </td>
             <td>
                 @(item.Category?.CategoryName ?? "—")
@@ -60,10 +60,12 @@
             <td>
                 @(item.Venue?.VenueName ?? "—")
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ShowID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ShowID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ShowID">Delete</a>
+            <td class="text-end text-nowrap">
+                <a class="me-2" asp-action="Edit" asp-route-id="@item.ShowID">Edit</a>
+                <span class="text-muted">|</span>
+                <a class="mx-2" asp-action="Details" asp-route-id="@item.ShowID">Details</a>
+                <span class="text-muted">|</span>
+                <a class="ms-2" asp-action="Delete" asp-route-id="@item.ShowID">Delete</a>
             </td>
         </tr>
 }

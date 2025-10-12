@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EZTix.Data;
+using EZTix.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using EZTix.Data;
-using EZTix.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EZTix.Controllers
 {
@@ -166,5 +167,6 @@ namespace EZTix.Controllers
         {
             return _context.Show.Any(e => e.ShowID == id);
         }
+
     }
 }

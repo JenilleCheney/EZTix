@@ -33,3 +33,20 @@ body {
 .show-list {
     text-align: center;
 }
+
+/* make purple button rules important so they dont get overwritten */
+button.btn.btn-purple,
+input[type="submit"].btn.btn-purple,
+a.btn.btn-purple {
+  background-color: #6f42c1 !important;
+  border-color: #6f42c1 !important;
+  color: #fff !important;
+}
+
+button.btn.btn-purple:hover,
+input[type="submit"].btn.btn-purple:hover,
+a.btn.btn-purple:hover {
+  background-color: #5a32a6 !important;
+  border-color: #5a32a6 !important;
+  color: #fff !important;
+}
