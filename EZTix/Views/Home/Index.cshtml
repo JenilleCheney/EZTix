@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Welcome To EZ Tix</h1>
 </div>
 <div class="show-list">
@@ -12,9 +12,9 @@
         @foreach (var show in Model)
         {
            @* <img src="@show.ImagePath" alt="@show.Description" class="img-fluid rounded mb-2 performance-img" /> *@
-            <h2>@show.Title</h2>
+           @* <h2>@show.Title</h2>
             <p>
-                @* @show.ShowId<br /> *@
+                @* @show.ShowId<br /> 
                 @show.Description<br />
                 @show.Owner<br />
                 @show.ShowTime <br />
@@ -22,4 +22,72 @@
                 @show.Venue?.VenueLocation <br />
             </p>
         }
-</div>
+</div>*@
+<h1> Current Shows</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td class="text-nowrap">
+                    @item.ShowTime.ToString("MMMM d yyyy h:mm tt")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Owner)
+                </td>
+                <td class="text-nowrap">
+                    @item.Created.ToString("MMMM d yyyy h:mm tt")
+                </td>
+                <td>
+                    @(item.Category?.CategoryName ?? "—")
+                </td>
+                <td>
+                    @(item.Venue?.VenueName ?? "—")
+                </td>
+                <td class="text-end text-nowrap">
+                    <a class="me-2" asp-action="Edit" asp-route-id="@item.ShowID">Edit</a>
+                    <span class="text-muted">|</span>
+                    <a class="mx-2" asp-action="Details" asp-route-id="@item.ShowID">Details</a>
+                    <span class="text-muted">|</span>
+                    <a class="ms-2" asp-action="Delete" asp-route-id="@item.ShowID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

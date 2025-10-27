@@ -3,6 +3,7 @@ using EZTix.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,17 +61,43 @@ namespace EZTix.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShowID,Title,Description,ShowTime,Owner,Created,CategoryId,VenueId")] Show show)
+        public async Task<IActionResult> Create([Bind("ShowID,Title,Description,ShowTime,Owner,Created,CategoryId,VenueId,FileName,FormFile")] Show show)
         {
-            if (ModelState.IsValid)
+
+            show.Created = DateTime.Now;
             {
-                _context.Add(show);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    
+                    //
+                    // Step 1: save the file (optionally)
+                    //
+                    if (show.FormFile != null)
+                    {
+                        // Create a unique filename using a Guid          
+                        string filename = Guid.NewGuid().ToString() + Path.GetExtension(show.FormFile.FileName); // f81d4fae-7dec-11d0-a765-00a0c91e6bf6.jpg
+
+                        // Initialize the filename in photo record
+                        show.FileName = filename;
+
+                        // Get the file path to save the file. Use Path.Combine to handle diffferent OS
+                        string saveFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", filename);
+
+                        // Save file
+                        using (FileStream fileStream = new FileStream(saveFilePath, FileMode.Create))
+                        {
+                            await show.FormFile.CopyToAsync(fileStream);
+                        }
+                        _context.Add(show);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index), "Home"); // Home index page
+                    }
+                  
+                }
+                ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryName", show.CategoryId);
+                ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueName", show.VenueId);
+                return View(show);
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryName", show.CategoryId);
-            ViewData["VenueId"] = new SelectList(_context.Set<Venue>(), "VenueId", "VenueName", show.VenueId);
-            return View(show);
         }
 
         // GET: Shows/Edit/5

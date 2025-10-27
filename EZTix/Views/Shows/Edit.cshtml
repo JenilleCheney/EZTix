@@ -13,42 +13,51 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ShowID" />
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ShowTime" class="control-label"></label>
                 <input asp-for="ShowTime" class="form-control" />
                 <span asp-validation-for="ShowTime" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Owner" class="control-label"></label>
                 <input asp-for="Owner" class="form-control" />
                 <span asp-validation-for="Owner" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" />
-                <span asp-validation-for="Created" class="text-danger"></span>
+            <div class="form-group mb-3">
+                <label class="control-label">Created</label>
+                <p class="form-control-plaintext">@Model.Created.ToString("MMMM d yyyy h:mm tt")</p>
             </div>
-            <div class="form-group">
+            <input type="hidden" asp-for="Created" />
+
+            <div class="form-group mb-3">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="VenueId" class="control-label"></label>
                 <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId"></select>
                 <span asp-validation-for="VenueId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div>
+                <img src="/images/@Model.FileName" alt="@Model.Title" class="thumbnail img-preview"/>
+            </div>
+            <div class="mb-3" >
+                <label class="control-label">Change Photo:</label>
+                <input asp-for="FormFile" class="form-control" />
+                <span asp-validation-for="FormFile" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
                 <button type="submit" class="btn btn-purple mt-3">Save</button>
             </div>
         </form>

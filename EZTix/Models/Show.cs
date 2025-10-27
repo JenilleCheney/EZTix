@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EZTix.Models
 {
@@ -9,6 +10,8 @@ namespace EZTix.Models
         public int ShowID { get; set; }
 
         public string Title { get; set; } = string.Empty;
+
+        public string FileName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
         [DisplayFormat(DataFormatString = "{0:MMMM d yyyy  h:mm tt}", ApplyFormatInEditMode = true)]
@@ -29,6 +32,10 @@ namespace EZTix.Models
 
         public Category? Category { get; set; }
         public Venue? Venue { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Photograph")]
+        public IFormFile? FormFile { get; set; } // nullable
 
     }
 }
