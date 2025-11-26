@@ -27,8 +27,11 @@ namespace EZTix.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string username, string password, string? returnUrl)
         {
-            // Validate against credentials in appsettings.json
-            if (username == _configuration["eztix_username"] && password == _configuration["eztix_password"])
+            // Read credentials from configuration (user secrets use Eztix:Username/Eztix:Password)
+            var configuredUsername = _configuration["Eztix:Username"];
+            var configuredPassword = _configuration["Eztix:Password"];
+
+            if (username == configuredUsername && password == configuredPassword)
             {
                 // Build claims list
                 var claims = new List<Claim>
@@ -39,10 +42,10 @@ namespace EZTix.Controllers
 
                 // Create identity and principal
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
                 // Sign in
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity));
 
                 // Redirect to original page or default
                 if (!string.IsNullOrEmpty(returnUrl))

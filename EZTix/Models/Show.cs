@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ namespace EZTix.Models
         public string FileName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        [DisplayFormat(DataFormatString = "{0:MMMM d yyyy  h:mm tt}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:MMMM d yyyy  h:mm tt}", ApplyFormatInEditMode = true)]
 
         [Display(Name ="Show Date & Time")]
         public DateTime ShowTime  { get; set; }
@@ -37,5 +38,7 @@ namespace EZTix.Models
         [Display(Name = "Photograph")]
         public IFormFile? FormFile { get; set; } // nullable
 
+        // navigation: purchases for this show
+        public List<Purchase>? Purchases { get; set; }
     }
 }

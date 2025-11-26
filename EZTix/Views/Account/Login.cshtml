@@ -1,4 +1,9 @@
-﻿<h1>Login</h1>
+﻿<h1 class="visually-hidden">Login</h1>
+
+<div class="d-flex align-items-center justify-content-center mb-4">
+    <img src="~/images/EZTixLogo.jpg" alt="EZTix logo" class="img-fluid me-3" style="max-height:80px;" />
+    <h1 class="m-0" style="color:#643585;">Login</h1>
+</div>
 
 @if (ViewBag.ErrorMessage != null)
 {
@@ -7,21 +12,21 @@
     </div>
 }
 
-<form asp-action="Login" class="w-25">
+<form asp-action="Login" method="post" class="w-25 mx-auto">
+    @Html.AntiForgeryToken()
     <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
 
     <div class="mb-3">
         <label for="Username" class="control-label">Username</label>
-        <input type="text" id="Username" name="Username" class="form-control" />
+        <input type="text" id="Username" name="username" class="form-control" />
     </div>
 
     <div class="mb-3">
         <label for="Password" class="control-label">Password</label>
-        <input type="password" id="Password" name="Password" class="form-control" />
+        <input type="password" id="Password" name="password" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <input type="submit" value="Login" class="btn btn-primary" />
+        <input type="submit" value="Login" class="btn" style="background-color:#643585; border-color:#643585; color:#ffffff;" />
     </div>
-
 </form>

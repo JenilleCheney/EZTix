@@ -74,3 +74,42 @@
     <a asp-action="Edit" asp-route-id="@Model?.ShowID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<div class="col-12 mt-4">
+    <h4>Ticket Sales</h4>
+    <hr />
+    @if (Model.Purchases != null && Model.Purchases.Any())
+    {
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Purchase Id</th>
+                    <th>Number Of Tickets</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Payment Type</th>
+                    <th>Purchase Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var purchase in Model.Purchases)
+                {
+                    <tr>
+                        <td>@purchase.PurchaseId</td>
+                        <td>@purchase.NumTicketsOrdered</td>
+                        <td>@purchase.CustFirstName @(" ") @purchase.CustLastName</td>
+                        <td>@purchase.CustEmail</td>
+                        <td>@purchase.PhoneNumber</td>
+                        <td>@purchase.CreditCardType</td>
+                        <td>@purchase.PurchaseDate.ToString("g")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">No Tickets Currently Purchased</p>
+    }
+</div>

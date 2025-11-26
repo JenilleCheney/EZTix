@@ -39,6 +39,7 @@ namespace EZTix.Controllers
             var show = await _context.Show
                 .Include(s => s.Category)
                 .Include(s => s.Venue)
+                .Include(s => s.Purchases)
                 .FirstOrDefaultAsync(m => m.ShowID == id);
             if (show == null)
             {

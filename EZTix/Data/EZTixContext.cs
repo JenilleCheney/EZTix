@@ -17,5 +17,6 @@ namespace EZTix.Data
         public DbSet<EZTix.Models.Show> Show { get; set; } = default!;
         public DbSet<EZTix.Models.Category> Category { get; set; } = default!;
         public DbSet<EZTix.Models.Venue> Venue { get; set; } = default!;
+        public DbSet<EZTix.Models.Purchase> Purchase { get; set; } = default!;
     }
 }
